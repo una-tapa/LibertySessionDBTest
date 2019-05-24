@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+
+    <featureManager>
+	<feature>cdi-1.2</feature>
+	<feature>jsp-2.3</feature>
+	<feature>sessionDatabase-1.0</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint" host="*"
+                  httpPort="9080"
+                  httpsPort="9443" />
+                  
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <logging traceSpecification="com.ibm.ws.session*=all"></logging>
+
+    <httpSession cloneId="xxxx0001"></httpSession>
+    <library id="derbyLib">
+        <fileset dir="${shared.resource.dir}" includes="derby.jar"/>
+    </library>
+    <dataSource jndiName="jdbc/sessionDS" id="sessionDS">
+	<jdbcDriver libraryRef="derbyLib"/>
+	<properties.derby.embedded databaseName="${shared.resource.dir}/sessionDS" createDatabase="create"/>
+    </dataSource>
+
+    <httpSessionDatabase dataSourceRef="sessionDS"
+	useMultiRowSchema="true" writeContents="ONLY_UPDATED_ATTRIBUTES"
+	writeFrequency="TIME_BASED_WRITE" writeInterval="1s"/>
+
+</server>
+
