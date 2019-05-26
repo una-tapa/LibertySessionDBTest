@@ -1,6 +1,6 @@
 ### About this repo
 
-This repository contains Docker file, which creates an image to test websphere-liberty SessionDB function. 
+This repository contains a Docker file, which creates an image to test websphere-liberty SessionDB function. 
 
 The application creates CDI @SessionScoped Bean that is set to the current timestamp. 
 The session is configured with derby database. 
